@@ -8,8 +8,21 @@ Desc. del Proyecto
 ## Diseno de la Base de Datos
 
 ## Instrucciones para correr la simulacion
-La unica dependencia para el programa es tener instalado [Golang](https://go.dev), se utilizan librerias estandar. Se requiere navegar al directorio de Simulation y correr el siguiente comando
+Para correr la simulacion es necesario tener variables de entorno para la conexion a la base de datos, se debe crear un archivo .env dentro del folder de simulation con el siguiente template:
+
+```
+DB_USER=usuario
+DB_PASSWORD=password
+DB_NAME=nombre
+DB_HOST=localhost
+DB_PORT=5432
+```
+
+La unica dependencia para el programa es tener instalado [Golang](https://go.dev), se utilizan librerias estandar. Se requiere navegar al directorio de Simulation y correr los siguientes comandos:
+```
+go mod tidy
+```
 ```
 go run main.go
 ```
-
+Estos comandos se encargan de descargar las librerias necesarias y correr el programa
