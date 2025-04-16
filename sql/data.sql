@@ -47,12 +47,36 @@ INSERT INTO sections (venue_id, name, row_count, seats_per_row, available) VALUE
 
 -- Eventos
 INSERT INTO events (venue_id, name, start_time, end_time) VALUES
-  (1, 'Ozzy Osbourne', NOW() + INTERVAL '7 days', NOW() + INTERVAL '7 days 3 hours');
+  (1, 'Ozzy Osbourne', NOW() + INTERVAL '7 days', NOW() + INTERVAL '7 days 3 hours'),
+ (1, 'Metallica', NOW() + INTERVAL '14 days', NOW() + INTERVAL '14 days 2 hours');
+
 
 -- Precio por cada seccion, los seats del evento se llenan automaticamente con el precio
 -- por seccion
 INSERT INTO event_section_prices (section_id, event_id, price) VALUES
   (1, 1, 20.0),
   (2, 1, 40.0),
-  (3, 1, 30.0);
+  (3, 1, 30.0),
+    (1, 2, 20.0),
+    (2, 2, 40.0),
+    (3, 2, 30.0);
 
+-- Reservaciones
+INSERT INTO reservations (user_id, event_id) VALUES
+    (1, 2),
+    (2, 2),
+    (3, 2),
+    (4, 2),
+    (5, 2);
+
+-- Seat reservations
+INSERT INTO seats_reservations (reservation_id, event_id, event_seat_id) VALUES
+    (1, 2, 31),
+    (2, 2, 32),
+    (3, 2, 33),
+    (4, 2, 34),
+    (5, 2, 35);
+
+UPDATE event_seats
+    SET reserved = TRUE
+    WHERE id IN (31, 32, 33, 34, 35);
