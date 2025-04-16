@@ -96,7 +96,7 @@ func runSim(db *sql.DB, users int, isolation string, seatID int, eventID int) {
 			<-startSignal
 			start := time.Now()
 
-			reserveSeat(db, i+1, eventID, seatID, isolation, &wg, resultChan)
+			reserveSeat(db, i+1, eventID, seatID, isolation, resultChan)
 			durationChan <- time.Since(start)
 		}(i)
 	}
@@ -136,7 +136,8 @@ func runSim(db *sql.DB, users int, isolation string, seatID int, eventID int) {
 // 1. Leer si el asiento esta reservado o no
 // 2. Crear una reservacion para el usuario
 // 3. Marcar el asiento como reservado
-func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string, wg *sync.WaitGroup, resultChan chan<- bool) {
+// Comente los logs para evitar el output super grande D:
+func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string, resultChan chan<- bool) {
 	// Marca Goroutine como terminada al terminar la ejecucion de la funcion
 
 	// Iniciamos la transaccion con el nivel de aislamiento especificado
@@ -144,7 +145,7 @@ func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string,
 		Isolation: mapIsolationLevel(isolationLevel),
 	})
 	if err != nil {
-		log.Println("BeginTx failed:", err)
+		// log.Println("BeginTx failed:", err)
 		resultChan <- false
 		return
 	}
@@ -153,7 +154,7 @@ func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string,
 	var reserved bool
 	err = tx.QueryRow(`SELECT reserved FROM event_seats WHERE event_id = $1 AND seat_id = $2`, eventID, seatID).Scan(&reserved)
 	if err != nil {
-		log.Println("Error checking seat:", err)
+		// log.Println("Error checking seat:", err)
 		tx.Rollback()
 		resultChan <- false
 		return
@@ -170,7 +171,7 @@ func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string,
 	var reservationID int
 	err = tx.QueryRow(`INSERT INTO reservations (user_id, event_id) VALUES ($1, $2) RETURNING id`, userID, eventID).Scan(&reservationID)
 	if err != nil {
-		log.Println("Error inserting reservation:", err)
+		// log.Println("Error inserting reservation:", err)
 		tx.Rollback()
 		resultChan <- false
 		return
@@ -181,7 +182,7 @@ func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string,
 										VALUES ($1, $2, (SELECT id FROM event_seats WHERE event_id = $2 AND seat_id = $3))`,
 		reservationID, eventID, seatID)
 	if err != nil {
-		log.Println("Error inserting into seats_reservations:", err)
+		// log.Println("Error inserting into seats_reservations:", err)
 		resultChan <- false
 		return
 	}
@@ -189,14 +190,14 @@ func reserveSeat(db *sql.DB, userID, eventID, seatID int, isolationLevel string,
 	// Marcar asiento como reservado
 	_, err = tx.Exec(`UPDATE event_seats SET reserved = true WHERE event_id = $1 AND seat_id = $2`, eventID, seatID)
 	if err != nil {
-		log.Println("Error updating seat:", err)
+		// log.Println("Error updating seat:", err)
 		tx.Rollback()
 		resultChan <- false
 		return
 	}
 
 	if err = tx.Commit(); err != nil {
-		log.Println("Commit failed:", err)
+		// log.Println("Commit failed:", err)
 		resultChan <- false
 		return
 	}
