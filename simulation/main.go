@@ -59,8 +59,6 @@ func main() {
 			seatID += 1
 		}
 	}
-
-	runSim(db, 30, "REPEATABLE READ", 30, 1)
 }
 
 // Hashmap de utilidad para el nivel de aislamiento
