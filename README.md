@@ -2,7 +2,7 @@
 Este proyecto consiste en evaluar diferentes niveles de aislamiento para transacciones dentro de Postgres, realizando una simulacion de usuarios concurrentes intentando reservar un mismo asiento.
 
 ## Ubicacion de los Archivos
-- Docs: Documentacion en cuanto al diseno de la base de datos, analisis y reflexion correspondiente al proyecto
+- Docs: Diagrama ERD
 - SQL: Los scripts DDL y SQL para crear tablas e insertar datos
 - Simulation: Programa creado para simular consultas concurrentes a la base de datos
 ## Instrucciones para correr la simulacion
