@@ -1,6 +1,15 @@
 # Proyecto 2. ACID y Concurrencia
 Este proyecto consiste en evaluar diferentes niveles de aislamiento para transacciones dentro de Postgres, realizando una simulacion de usuarios concurrentes intentando reservar un mismo asiento.
 
+## Notas
+
+- Ejecutar triggers antes de insertar datos, auto-llena los asientos con precios basado en el venue y otros valores insertados (me ahorre bastantes inserciones)
+- El script solo se puede ejecutar 1 vez, luego hay que volver a correr los scripts de SQL porque tengo los numeros de los asientos 'quemados' en el codigo.
+- Los queries hacen rollback cuando encuentran un error, no se realiza toda la transaccion y luego se espera a que de un error en el commit. Obtuve resultados similares de ambas maneras pero me parecio mejor practica hacerlo de esta manera.
+- Los logs de los errores estan comentados porque el output estaba horrible, se pueden descomentar pero es muy poco legible.
+- No implemente restricciones en cuanto a la reserva de asientos en la DB, estoy muy al tanto que con un unique en las reservas de asientos se evitan bastantes problemas pero parte del chiste es que truene el sistema.
+- 
+
 ## Ubicacion de los Archivos
 - Docs: Diagrama ERD
 - SQL: Los scripts DDL y SQL para crear tablas, insertar datos y agregar triggers. + un nuke.sql porque se me hace de utilidad v:
