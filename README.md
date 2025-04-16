@@ -3,6 +3,7 @@ Este proyecto consiste en evaluar diferentes niveles de aislamiento para transac
 
 ## Notas
 
+- Esta algo raro el ERD, pero lo hice en base a llenar automaticamente asientos (en caso de tener venues repetidos) y unicamente tener que llenar precios / seccion del venue para evitar ingresar precios de asientos individuales.
 - Ejecutar triggers antes de insertar datos, auto-llena los asientos con precios basado en el venue y otros valores insertados (me ahorre bastantes inserciones)
 - El script solo se puede ejecutar 1 vez, luego hay que volver a correr los scripts de SQL porque tengo los numeros de los asientos 'quemados' en el codigo.
 - Los queries hacen rollback cuando encuentran un error, no se realiza toda la transaccion y luego se espera a que de un error en el commit. Obtuve resultados similares de ambas maneras pero me parecio mejor practica hacerlo de esta manera.
