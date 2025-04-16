@@ -1,20 +1,37 @@
 -- Usuarios
-INSERT INTO users (name, email, phone) VALUES 
-  ('Alice', 'alice@example.com', '1000000001'),
-  ('Bob', 'bob@example.com', '1000000002'),
-  ('Carol', 'carol@example.com', '1000000003'),
-  ('Dave', 'dave@example.com', '1000000004'),
-  ('Eve', 'eve@example.com', '1000000005'),
-  ('Frank', 'frank@example.com', '1000000006'),
-  ('Grace', 'grace@example.com', '1000000007'),
-  ('Heidi', 'heidi@example.com', '1000000008'),
-  ('Ivan', 'ivan@example.com', '1000000009'),
-  ('Judy', 'judy@example.com', '1000000010'),
-  ('Mallory', 'mallory@example.com', '1000000011'),
-  ('Niaj', 'niaj@example.com', '1000000012'),
-  ('Olivia', 'olivia@example.com', '1000000013'),
-  ('Peggy', 'peggy@example.com', '1000000014'),
-  ('Trent', 'trent@example.com', '1000000015');
+
+INSERT INTO users (name, email, phone) VALUES
+    ('Alice', 'alice@example.com', '1000000001'),
+    ('Bob', 'bob@example.com', '1000000002'),
+    ('Carol', 'carol@example.com', '1000000003'),
+    ('Dave', 'dave@example.com', '1000000004'),
+    ('Eve', 'eve@example.com', '1000000005'),
+    ('Frank', 'frank@example.com', '1000000006'),
+    ('Grace', 'grace@example.com', '1000000007'),
+    ('Heidi', 'heidi@example.com', '1000000008'),
+    ('Ivan', 'ivan@example.com', '1000000009'),
+    ('Judy', 'judy@example.com', '1000000010'),
+    ('Mallory', 'mallory@example.com', '1000000011'),
+    ('Niaj', 'niaj@example.com', '1000000012'),
+    ('Olivia', 'olivia@example.com', '1000000013'),
+    ('Peggy', 'peggy@example.com', '1000000014'),
+    ('Trent', 'trent@example.com', '1000000015'),
+    ('George', 'george@example.com', '1000000016'),
+    ('Fred', 'fred@example.com', '1000000017'),
+    ('Fisher', 'fisher@example.com', '1000000018'),
+    ('Nick', 'nick@example.com', '1000000019'),
+    ('Oscar', 'oscar@example.com', '1000000020'),
+    ('Paul', 'paul@example.com', '1000000021'),
+    ('Quincy', 'quincy@example.com', '1000000022'),
+    ('Rita', 'rita@example.com', '1000000023'),
+    ('Sam', 'sam@example.com', '1000000024'),
+    ('Tina', 'tina@example.com', '1000000025'),
+    ('Uma', 'uma@example.com', '1000000026'),
+    ('Vince', 'vince@example.com', '1000000027'),
+    ('Wendy', 'wendy@example.com', '1000000028'),
+    ('Xander', 'xander@example.com', '1000000029'),
+    ('Yara', 'yara@example.com', '1000000030');
+
 
 -- Un venue para este ejemplo
 INSERT INTO venues (name, address) VALUES ('Main Hall', '123 Street');
@@ -39,15 +56,3 @@ INSERT INTO event_section_prices (section_id, event_id, price) VALUES
   (2, 1, 40.0),
   (3, 1, 30.0);
 
--- Reservaciones, creamos manualmente pero en la simulacion se crean antes de reservar el asiento
-INSERT INTO reservations (user_id, event_id) VALUES (1, 1), (2, 1), (3, 1);
-
--- Reserve some seats
-INSERT INTO seats_reservations (reservation_id, event_id, event_seat_id)
-SELECT 1, 1, id FROM event_seats WHERE event_id = 1 LIMIT 2;
-
-INSERT INTO seats_reservations (reservation_id, event_id, event_seat_id)
-SELECT 2, 1, id FROM event_seats WHERE event_id = 1 OFFSET 2 LIMIT 2;
-
-INSERT INTO seats_reservations (reservation_id, event_id, event_seat_id)
-SELECT 3, 1, id FROM event_seats WHERE event_id = 1 OFFSET 4 LIMIT 2;
