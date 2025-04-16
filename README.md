@@ -3,7 +3,7 @@ Este proyecto consiste en evaluar diferentes niveles de aislamiento para transac
 
 ## Ubicacion de los Archivos
 - Docs: Diagrama ERD
-- SQL: Los scripts DDL y SQL para crear tablas e insertar datos
+- SQL: Los scripts DDL y SQL para crear tablas, insertar datos y agregar triggers. + un nuke.sql porque se me hace de utilidad v:
 - Simulation: Programa creado para simular consultas concurrentes a la base de datos
 ## Instrucciones para correr la simulacion
 Para correr la simulacion es necesario tener variables de entorno para la conexion a la base de datos, se debe crear un archivo .env dentro del folder de simulation con el siguiente template:
