@@ -8,7 +8,6 @@ Este proyecto consiste en evaluar diferentes niveles de aislamiento para transac
 - Los queries hacen rollback cuando encuentran un error, no se realiza toda la transaccion y luego se espera a que de un error en el commit. Obtuve resultados similares de ambas maneras pero me parecio mejor practica hacerlo de esta manera.
 - Los logs de los errores estan comentados porque el output estaba horrible, se pueden descomentar pero es muy poco legible.
 - No implemente restricciones en cuanto a la reserva de asientos en la DB, estoy muy al tanto que con un unique en las reservas de asientos se evitan bastantes problemas pero parte del chiste es que truene el sistema.
-- 
 
 ## Ubicacion de los Archivos
 - Docs: Diagrama ERD
